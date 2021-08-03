@@ -9,23 +9,24 @@
 
 # Ejemplo de Output
 ---VACUNACION MAYORES DE 18 AÑOS---
-Numero de vacunas administradas: 24823976
-Numero de personas con primera dosis: 12656353
-Numero de personas con segunda dosis: 11660882
-Numero de personas con unica dosis 506741
-Poblacion Objetivo: 15200840
-Personas con primera y unica dosis: 86.59%;Con respecto al total de habitantes: 68.86%
-Personas con segunda y unica dosis: 80.05%;Con respecto al total de habitantes: 63.65%
-Datos Actualizados al martes, 3 de agosto de 2021 13:31:48
----VACUNACION 12 A 17 AÑOS---
-Numero de vacunas administradas: 864857
-Numero de personas con primera dosis: 694831
-Numero de personas con segunda dosis: 170026
-Poblacion Objetivo: 1495162
-Personas con primera dosis: 46.47%
-Personas con primera dosis: 11.37%
----TOTAL NACIONAL---
- Datos con respecto a la poblacion total en Chile segun el Banco Mundial
-Primera y unica dosis: 13857925; 72.49%
-Segunda y unica dosis: 12337649; 64.54%
-Maximo posible porcentaje de vacunacion (considerando 100% de las poblacion objetivo): 87.34%
+
+Numero de vacunas administradas: 24823976  
+Numero de personas con primera dosis: 12656353  
+Numero de personas con segunda dosis: 11660882  
+Numero de personas con unica dosis 506741  
+Poblacion Objetivo: 15200840  
+Personas con primera y unica dosis: 86.59%;Con respecto al total de habitantes: 68.86%  
+Personas con segunda y unica dosis: 80.05%;Con respecto al total de habitantes: 63.65%  
+Datos Actualizados al martes, 3 de agosto de 2021 13:31:48  
+---VACUNACION 12 A 17 AÑOS---  
+Numero de vacunas administradas: 864857  
+Numero de personas con primera dosis: 694831  
+Numero de personas con segunda dosis: 170026  
+Poblacion Objetivo: 1495162  
+Personas con primera dosis: 46.47%  
+Personas con primera dosis: 11.37%  
+---TOTAL NACIONAL---  
+ Datos con respecto a la poblacion total en Chile segun el Banco Mundial  
+Primera y unica dosis: 13857925; 72.49%  
+Segunda y unica dosis: 12337649; 64.54%  
+Maximo posible porcentaje de vacunacion (considerando 100% de las poblacion objetivo): 87.34%  
