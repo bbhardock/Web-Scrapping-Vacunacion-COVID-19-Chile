@@ -14,19 +14,20 @@ driver = webdriver.Chrome(executable_path=r'chromedriver.exe')
 driver.get('https://informesdeis.minsal.cl/SASVisualAnalytics/?reportUri=%2Freports%2Freports%2F9037e283-1278-422c-84c4-16e42a7026c8&sectionIndex=0&sso_guest=true&reportViewOnly=true&sas-welcome=false')
 
 content = ""
-#Hay que esperar a la pagina para que se abra
+#Un delay para esperar que la pagina cargue
 delay = 10 #segundos
 try:
     #Cuando la pagina está cargada, el titulo es el que está aca
     tituloEsperado = "VACUNACIÓN SARS-CoV-2 - SAS® Visual Analytics"
     #Digo que espere hasta que el titulo de la pagina sea el que esta arriba, expected condition se usa aca
     myElem = WebDriverWait(driver, delay).until(EC.title_is(tituloEsperado))
+    #Que duerma un poco, tiene sueño
+    #es para que los datos se carguen bien, sin esto a veces la ejecucion da errores de "sin datos"
     time.sleep(3)
     #Lo importante esta dentro de un iframe, asi que hay que buscar el iframe (solo uno para la pagina base)
     seq= driver.find_elements_by_tag_name('iframe')
     #hacerle el switch a ese iframe para que tome los datos importantes
     driver.switch_to.frame(seq[0])
-    
     #se mueve hacia la posicion de la pestaña de vacunacion de menores y le hace click
     pestania = driver.find_element(By.ID, '__filter0-appSplitView-reportPanelView-0-sectionTabBar--header-7-text')
     webdriver.ActionChains(driver).move_to_element(pestania).click().perform()
@@ -36,7 +37,7 @@ try:
     content= driver.page_source
     print("¡TREMENDO, SE CARGO LA PAGINA! AHORA VIENE LO BUENOOOOO")
 except Exception as e:
-    print(e)
+    print("Para emocion, paso esto: ", e)
 
 #cierra el navegadores
 driver.quit()
@@ -44,7 +45,7 @@ driver.quit()
 soup = BeautifulSoup(content,"lxml")
 
 
-print("ESTOS SON LOS DATOS DE VERDAD")
+
 #como referencia, este titulo deberia ser diferente al tituloEsperado, porque el titulo de iframe es otro
 #print(soup.title.string)
 
@@ -66,19 +67,21 @@ numeroDeVacunasAdministradas = datosBrutos[0]
 personasPrimeraDosis = datosBrutos[1]
 personasSegundaDosis = datosBrutos[2]
 personasUnicaDosis = datosBrutos[3]
-poblacionObj = datosBrutos[4]
+personasTerceraDosis = datosBrutos[4]
+poblacionObj = datosBrutos[5]
 actualizacionTabla = datosBrutos[-1] # siempre sera el ultimo, este dato esta al final de la pag
 poblacionTotalChile = 19116209
 
-dosisMenores = datosBrutos[12]
-primeraDosisMenores = datosBrutos[13]
-segundaDosisMenores = datosBrutos[14]
-poblacionObjMenores = datosBrutos[15]
+
+dosisMenores = datosBrutos[14]
+primeraDosisMenores = datosBrutos[15]
+segundaDosisMenores = datosBrutos[16]
+poblacionObjMenores = datosBrutos[17]
 
 
 porcentajePrimera = ((personasPrimeraDosis+personasUnicaDosis)/poblacionObj)*100
 porcentajeSegunda = ((personasSegundaDosis+personasUnicaDosis)/poblacionObj)*100
-porcentajeObjetivoConTotal = datosBrutos[4]/poblacionTotalChile
+porcentajeObjetivoConTotal = poblacionObj/poblacionTotalChile
 
 
 nombreArchivo = actualizacionTabla.replace(" ","_").replace(":","-")+".txt"
@@ -113,7 +116,7 @@ file.write("\nNumero de personas con segunda dosis: "+str(segundaDosisMenores))
 file.write("\nPoblacion Objetivo: "+str(poblacionObjMenores))
 
 file.write("\nPersonas con primera dosis: "+str(round(porcentajePrimeraMenores*100,2))+"%")
-file.write("\nPersonas con primera dosis: "+str(round(porcentajeSegundaMenores*100,2))+"%")
+file.write("\nPersonas con segunda dosis: "+str(round(porcentajeSegundaMenores*100,2))+"%")
 
 totalPrimeraDosis = personasPrimeraDosis + personasUnicaDosis + primeraDosisMenores
 totalSegundaDosis = personasSegundaDosis + personasUnicaDosis + segundaDosisMenores
